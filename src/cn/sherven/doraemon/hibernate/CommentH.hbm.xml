@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-4-23 15:25:25 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="cn.sherven.doraemon.hibernate.CommentH" table="comment">
+        <id name="comment_id" type="java.lang.String">
+            <column name="COMMENT_ID" />
+            <generator class="native" />
+        </id>
+        <property name="class_id" type="java.lang.String">
+            <column name="CLASS_ID" />
+        </property>
+        <property name="message" type="java.lang.String">
+            <column name="MESSAGE" />
+        </property>
+        <property name="score" type="java.lang.String">
+            <column name="SCORE" />
+        </property>
+        <property name="teacher_id" type="java.lang.String">
+            <column name="TEACHER_ID" />
+        </property>
+        <property name="courses_id" type="java.lang.String">
+            <column name="COURSES_ID" />
+        </property>
+        <property name="student_id" type="java.lang.String">
+            <column name="STUDENT_ID" />
+        </property>
+    </class>
+</hibernate-mapping>

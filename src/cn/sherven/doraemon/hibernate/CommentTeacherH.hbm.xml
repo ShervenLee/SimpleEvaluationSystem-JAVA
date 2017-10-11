@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-5-16 19:19:17 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="cn.sherven.doraemon.hibernate.CommentTeacherH" table="commentteacher">
+		<id name="id_" type="java.lang.String">
+			<column name="ID_" />
+			<generator class="native" />
+		</id>
+		<property name="message" type="java.lang.String">
+			<column name="MESSAGE" />
+		</property>
+		<property name="score" type="java.lang.String">
+			<column name="SCORE" />
+		</property>
+		<property name="teacher_id_src" type="java.lang.String">
+			<column name="TEACHER_ID_SRC" />
+		</property>
+		<property name="teacher_id_target" type="java.lang.String">
+			<column name="TEACHER_ID_TARGET" />
+		</property>
+	</class>
+</hibernate-mapping>

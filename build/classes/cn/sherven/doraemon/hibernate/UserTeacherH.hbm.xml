@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-5-13 18:46:26 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="cn.sherven.doraemon.hibernate.UserTeacherH" table="user_teacher">
+		<id name="teacher_id" type="java.lang.String">
+			<column name="TEACHER_ID" />
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="java.lang.String">
+			<column name="NAME" />
+		</property>
+		<property name="pwd" type="java.lang.String">
+			<column name="PWD" />
+		</property>
+		<property name="tel" type="java.lang.String">
+			<column name="TEL" />
+		</property>
+		<property name="type" type="java.lang.String">
+			<column name="TYPE" />
+		</property>
+		<property name="class_id_list" type="java.lang.String">
+			<column name="CLASS_ID_LIST" />
+		</property>
+		<property name="teacher_group" type="java.lang.String">
+			<column name="TEACHER_GROUP" />
+		</property>
+	</class>
+</hibernate-mapping>

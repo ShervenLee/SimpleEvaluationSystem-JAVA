@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="docs"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JDK">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/gson-2.3.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mysql-connector-java.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Users/ShervenLee/Desktop/hibernate-release-5.2.10.Final/lib/spatial/geolatte-geom-1.0.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ShervenLee/Desktop/hibernate-release-5.2.10.Final/lib/spatial/guava-18.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ShervenLee/Desktop/hibernate-release-5.2.10.Final/lib/spatial/hibernate-spatial-5.2.10.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ShervenLee/Desktop/hibernate-release-5.2.10.Final/lib/spatial/jna-4.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ShervenLee/Desktop/hibernate-release-5.2.10.Final/lib/spatial/jna-platform-4.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ShervenLee/Desktop/hibernate-release-5.2.10.Final/lib/spatial/jts-1.13.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ShervenLee/Desktop/hibernate-release-5.2.10.Final/lib/spatial/postgresql-9.4-1200-jdbc41.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ShervenLee/Desktop/hibernate-release-5.2.10.Final/lib/spatial/slf4j-api-1.7.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ShervenLee/Desktop/hibernate-release-5.2.10.Final/lib/spatial/slf4j-simple-1.7.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ShervenLee/Desktop/hibernate-release-5.2.10.Final/lib/spatial/waffle-jna-1.7.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v6.0"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

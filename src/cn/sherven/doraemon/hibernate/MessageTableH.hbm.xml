@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-4-29 22:30:37 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="cn.sherven.doraemon.hibernate.MessageTableH" table="messagetable">
+        <id name="id_" type="java.lang.String">
+            <column name="ID_" />
+            <generator class="native" />
+        </id>
+        <property name="type" type="java.lang.String">
+            <column name="TYPE" />
+        </property>
+        <property name="json" type="java.lang.String">
+            <column name="JSON" />
+        </property>
+    </class>
+</hibernate-mapping>

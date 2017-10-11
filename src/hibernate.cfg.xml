@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+        <!-- 配置数据库相关 -->
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">x5</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql:///doraemon</property>
+
+		<!-- 配置方言 -->
+		<property name="hibernate.dialect"> org.hibernate.dialect.MySQLInnoDBDialect</property>
+		<!-- 执行操作时是否在控制台打印 -->
+		<property name="show_sql">true</property>
+		<!-- 执行操作时是否格式化 -->
+		<property name="format_fel">true</property>
+		<!-- 指定自动生成策划 -->
+		<property name="hbm2ddl.auto">update</property>
+		<!-- 制定关联的配置文件 -->
+		<mapping resource="cn/sherven/doraemon/hibernate/UserTeacherH.hbm.xml" />
+		<mapping resource="cn/sherven/doraemon/hibernate/UserStudentH.hbm.xml" />
+		<mapping resource="cn/sherven/doraemon/hibernate/AdminH.hbm.xml" />
+
+		<mapping resource="cn/sherven/doraemon/hibernate/ClassTableH.hbm.xml" />
+		<mapping resource="cn/sherven/doraemon/hibernate/MessageTableH.hbm.xml" />
+		<mapping resource="cn/sherven/doraemon/hibernate/CommentH.hbm.xml" />
+		<mapping resource="cn/sherven/doraemon/hibernate/CourseH.hbm.xml" />
+		<mapping resource="cn/sherven/doraemon/hibernate/CommentTeacherH.hbm.xml" />
+		<mapping resource="cn/sherven/doraemon/hibernate/TeacherGroupH.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>

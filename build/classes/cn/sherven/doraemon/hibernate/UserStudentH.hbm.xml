@@ -32,5 +32,9 @@
 		<property name="class_name" type="java.lang.String">
 			<column name="CLASS_NAME" />
 		</property>
+		<property name="msgtable_id" type="java.lang.String">
+			<column name="MEGTABLE_ID" />
+		</property>
+		
 	</class>
 </hibernate-mapping>

@@ -14,5 +14,8 @@
         <property name="json" type="java.lang.String">
             <column name="JSON" />
         </property>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
     </class>
 </hibernate-mapping>

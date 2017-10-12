@@ -1,16 +1,9 @@
 package cn.sherven.doraemon.hibernateController;
 
-import static org.hamcrest.CoreMatchers.nullValue;
-
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.engine.spi.ExecuteUpdateResultCheckStyle;
 import org.hibernate.query.Query;
-import org.postgresql.translation.messages_bg;
-
-import com.google.gson.Gson;
-
 import cn.sherven.doraemon.admin.servlet.Config;
 import cn.sherven.doraemon.hibernate.HibernateUtils;
 import cn.sherven.doraemon.hibernate.UserStudentH;
@@ -81,7 +74,7 @@ public class UserStudent_HC {
 		try {
 			session = HibernateUtils.getSession();
 			// from后面是对象，不是表名
-			String hql = "from UserStudentH as user_student where user_student.student_id=:student_id";// 使用命名参数，推荐使用，易读。
+			String hql = "from UserStudentH as m where m.student_id=:student_id";// 使用命名参数，推荐使用，易读。
 			Query query = session.createQuery(hql);
 			query.setParameter("student_id", studend_id);
 			List<UserStudentH> list = query.list();
@@ -138,7 +131,7 @@ public class UserStudent_HC {
 		try {
 			session = HibernateUtils.getSession();
 			// from后面是对象，不是表名
-			String hql = "from UserStudentH as model order by model.class_id asc ";// 使用命名参数，推荐使用，易读。
+			String hql = "from UserStudentH as m order by m.class_id asc ";// 使用命名参数，推荐使用，易读。
 			Query query = session.createQuery(hql);
 
 			query.setFirstResult((page - 1) * Config.getPagesize());

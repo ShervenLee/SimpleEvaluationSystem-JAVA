@@ -101,7 +101,7 @@ public class AUser extends HttpServlet {
 			add();
 			break;
 		case "del":
-			del();
+			delStu();
 			break;
 		case "update":
 			update();
@@ -131,9 +131,18 @@ public class AUser extends HttpServlet {
 		map.put("type", "stu");
 		response.getWriter().append(new Gson().toJson(map));
 	}
+	private void delStu() {
+		String userid = request.getParameter("userid");
+		System.out.println("====" + userid + "------------");
+		if (userid.equals("") || userid == null) {
+			this.map.put("isok", "no");
+			return;
+		}
+		UserStudent_HC.del(userid);
+		this.map.put("deluserid", userid);
+	}
 
 	private void getTea() {
-
 	}
 
 	private void getAdmin() {
@@ -151,15 +160,6 @@ public class AUser extends HttpServlet {
 	private void update() {
 	}
 
-	private void del() {
-		String userid = request.getParameter("userid");
-		System.out.println("====" + userid + "------------");
-		if (userid.equals("") || userid == null) {
-			this.map.put("isok", "no");
-			return;
-		}
-		UserStudent_HC.del(userid);
-		this.map.put("deluserid", userid);
-	}
+	
 
 }

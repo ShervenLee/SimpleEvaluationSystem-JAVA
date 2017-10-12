@@ -10,7 +10,7 @@ import cn.sherven.doraemon.hibernateController.UserStudent_HC;
 public class Test {
 
 	public static void main(String[] args) {
-		List<UserStudentH> search = UserStudent_HC.search("李雪");
+		List<UserStudentH> search = UserStudent_HC.search("");
 		if (search != null) {
 			for (int i = 0; i < search.size(); i++) {
 				System.out.println(search.get(i).getName());

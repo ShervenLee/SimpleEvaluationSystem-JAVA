@@ -10,6 +10,19 @@ public class UserStudentH {
 	private String major;
 	private String class_name;
 	private String class_id;
+	private String msgtable_id;
+	/**
+	 * @return the msgtable_id
+	 */
+	public String getMsgtable_id() {
+		return msgtable_id;
+	}
+	/**
+	 * @param msgtable_id the msgtable_id to set
+	 */
+	public void setMsgtable_id(String msgtable_id) {
+		this.msgtable_id = msgtable_id;
+	}
 	/**
 	 * @return the studend_id
 	 */

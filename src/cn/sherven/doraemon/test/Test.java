@@ -1,14 +1,22 @@
 package cn.sherven.doraemon.test;
 
-import cn.sherven.doraemon.Tool.Funtool;
-import cn.sherven.doraemon.hibernateController.UserTeacher_HC;
+import static org.hamcrest.CoreMatchers.nullValue;
+
+import java.util.List;
+
+import cn.sherven.doraemon.hibernate.UserStudentH;
+import cn.sherven.doraemon.hibernateController.UserStudent_HC;
 
 public class Test {
 
 	public static void main(String[] args) {
-		// System.out.println(UserTeacher_HC.getMaxItem().toString());
-		Long long1 = Long.parseLong("19");
-		System.out.println(Funtool.maxitemToMaxPage(long1));
+		List<UserStudentH> search = UserStudent_HC.search("李雪");
+		if (search != null) {
+			for (int i = 0; i < search.size(); i++) {
+				System.out.println(search.get(i).getName());
+			}
+		}
+		System.exit(0);
 	}
 
 }

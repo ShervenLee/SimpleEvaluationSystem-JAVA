@@ -141,7 +141,7 @@ public class AUser extends HttpServlet {
 	}
 
 	private void search() {
-		String type, key, value;
+		String kwd = request.getParameter("kwd");
 	}
 
 	private void add() {
@@ -149,12 +149,11 @@ public class AUser extends HttpServlet {
 	}
 
 	private void update() {
-
 	}
 
 	private void del() {
 		String userid = request.getParameter("userid");
-		System.out.println("===="+userid+"------------");
+		System.out.println("====" + userid + "------------");
 		if (userid.equals("") || userid == null) {
 			this.map.put("isok", "no");
 			return;

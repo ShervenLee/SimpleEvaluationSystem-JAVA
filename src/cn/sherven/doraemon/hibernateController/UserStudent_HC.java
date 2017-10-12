@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.engine.spi.ExecuteUpdateResultCheckStyle;
 import org.hibernate.query.Query;
+import org.postgresql.translation.messages_bg;
 
 import com.google.gson.Gson;
 
@@ -169,42 +170,48 @@ public class UserStudent_HC {
 		}
 	}
 
+	public static Boolean del(String[] useridArr) {
+		Session session = null;
+		session = HibernateUtils.getSession();
+		session.beginTransaction();
+		UserStudentH model = null;
+
+		for (int i = 0; i < useridArr.length; i++) {
+			model = session.get(UserStudentH.class, useridArr[i]);
+			if (model != null) {
+				session.delete(model);
+			}
+		}
+		session.getTransaction().commit();
+		session.close();
+		return true;
+	}
+
 	public static Boolean del(String userid) {
 		Session session = null;
 		session = HibernateUtils.getSession();
-
 		session.beginTransaction();
+		UserStudentH model = session.get(UserStudentH.class, userid);
 
-		// String hql="delete UserStudentH as model where
-		// model.student_id=:student_id";
-		// Query query=session.createQuery(hql);
-		// query.setParameter("student_id", userid);
-
-		// int isok = query.executeUpdate();
-
-		// if (isok>0) {
-		// System.out.println("OK=============");
-		// }else{
-		// System.out.println("NO---------------");
-		// }
-
-		// session.beginTransaction().commit();
-
-		session.close();
-
-		session = HibernateUtils.getSession();
-		session.beginTransaction();
-		UserStudentH load = session.load(UserStudentH.class, userid);
-
-		if (load == null) {
-			System.out.println("null===============================");
-		} else {
-			System.out.println("!nullllllllllllllllllllllllllllllll");
+		if (model != null) {
+			session.delete(model);
+			session.getTransaction().commit();
+			return true;
 		}
+		session.close();
+		return false;
+	}
 
-		session.delete(load);
-
-		session.getTransaction().commit();
-		return true;
+	public static List<UserStudentH> search(String kwd) {
+		Session session = HibernateUtils.getSession();
+		session.beginTransaction();
+		String query = "from UserStudentH m where ";
+		String[] tablekey = { "m.student_id", "m.name", "m.department", "m.major", "m.class_name" };
+		for (int i = 0; i < tablekey.length - 2; i++) {
+			query += tablekey[i] + " like'%%" + kwd + "%%' or ";
+		}
+		query += tablekey[tablekey.length - 1] + " like'%%" + kwd + "%%'";
+		Query createQuery = session.createQuery(query);
+		return createQuery.list();
 	}
 }

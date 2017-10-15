@@ -169,4 +169,14 @@
     <servlet-name>AUser</servlet-name>
     <url-pattern>/AUser</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AMsgTable</display-name>
+    <servlet-name>AMsgTable</servlet-name>
+    <servlet-class>cn.sherven.doraemon.admin.servlet.AMsgTable</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AMsgTable</servlet-name>
+    <url-pattern>/AMsgTable</url-pattern>
+  </servlet-mapping>
 </web-app>

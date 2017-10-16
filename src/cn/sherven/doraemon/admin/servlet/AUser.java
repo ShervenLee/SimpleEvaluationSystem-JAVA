@@ -1,7 +1,9 @@
 package cn.sherven.doraemon.admin.servlet;
 
 import static org.hamcrest.CoreMatchers.anything;
+import static org.hamcrest.CoreMatchers.nullValue;
 
+import java.awt.image.RescaleOp;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +41,7 @@ public class AUser extends HttpServlet {
 	 * action=update
 	 * 
 	 */
-	private String action, type, id, page;
+	private String action, type, userid, page;
 	private Map<String, Object> map;
 
 	/**
@@ -107,22 +109,23 @@ public class AUser extends HttpServlet {
 			update();
 			break;
 		default:
-			map.put("isok", "err");
-			map.put("errinfo", "action null");
+			map.put("isok", "ok");
+			map.put("errinfo", "action err");
 		}
-		response.getWriter().append(new Gson().toJson(map));
 	}
 
 	private void getStu() throws IOException {
-		String page;
-		page = request.getParameter("page");
-
-		System.out.println("----" + page + "==================");
+		String page = request.getParameter("page");
+		String userid = request.getParameter("userid");
+		if (userid != null && userid.equals("") == false) {
+			UserStudentH model = UserStudent_HC.queryBy_userid(userid);
+			map.put("model", new Gson().toJson(model));
+			return;
+		}
 
 		if (page == null || page.equals("")) {
 			page = "1";
 		}
-		System.out.println("----" + page + "==================");
 		List<UserStudentH> list = UserStudent_HC.queryBy_def_sort_classname(Integer.parseInt(page));
 
 		map.put("list", list);
@@ -131,18 +134,23 @@ public class AUser extends HttpServlet {
 		map.put("type", "stu");
 		response.getWriter().append(new Gson().toJson(map));
 	}
-	private void delStu() {
+
+	private void delStu() throws IOException {
 		String userid = request.getParameter("userid");
 		System.out.println("====" + userid + "------------");
 		if (userid.equals("") || userid == null) {
 			this.map.put("isok", "no");
+			this.map.put("errinfo", "userid null");
 			return;
 		}
 		UserStudent_HC.del(userid);
 		this.map.put("deluserid", userid);
+		this.map.put("isok", "ok");
+		response.getWriter().append(new Gson().toJson(map));
 	}
 
 	private void getTea() {
+
 	}
 
 	private void getAdmin() {
@@ -159,7 +167,5 @@ public class AUser extends HttpServlet {
 
 	private void update() {
 	}
-
-	
 
 }

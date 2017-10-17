@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import cn.sherven.doraemon.admin.servlet.ConfigAdmin;
 import cn.sherven.doraemon.hibernate.HibernateUtils;
 import cn.sherven.doraemon.hibernate.UserAdminH;
 import cn.sherven.doraemon.hibernate.UserTeacherH;
@@ -35,6 +36,39 @@ public class UserAdminHC {
 			HibernateUtils.closeSession(session);
 		}
 		return true;
+	}
+	public static List<UserTeacherH> queryAllBy_pagenub(Integer pagenub) {
+		Session session = null;
+		try {
+			session = HibernateUtils.getSession();
+			// from后面是对象，不是表名
+			String hql = "from UserAdminH as model";
+			Query query = session.createQuery(hql);
+			query.setFirstResult((pagenub - 1) * ConfigAdmin.getPagesize());
+			query.setMaxResults(ConfigAdmin.getPagesize());
+			List<UserTeacherH> list = query.list();
+			return list;
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+	public static Integer getMaxPageNub() {
+		Session session = null;
+		try {
+			session = HibernateUtils.getSession();
+			// from后面是对象，不是表名
+			String hql = "select count(*) from UserAdminH";
+			// String hql = "from UserStudentH as model order by model.class_id
+			// asc ";// 使用命名参数，推荐使用，易读。
+			Query query = session.createQuery(hql);
+			Integer count = Integer.parseInt(String.valueOf(query.uniqueResult()));
+			Double maxpage = count / (ConfigAdmin.getPagesize() * 1.0);
+			return (int) Math.ceil(maxpage);
+		} finally {
+			if (session != null)
+				session.close();
+		}
 	}
 	/**
 	 * 查询

@@ -11,6 +11,15 @@ public class Config {
 	public static final String httpRequestPath = "http://localhost:8080/doraemon/";
 	private static final Integer pageMaxItem = 15;// 每页最多显示的item条数
 	private static final Integer cookieOutTime=3600;//回话过期时间，（秒）
+	
+	private static final Boolean test=true;
+
+	/**
+	 * @return the test
+	 */
+	public static Boolean getTest() {
+		return test;
+	}
 
 	/**
 	 * @return the cookieouttime

@@ -16,8 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import cn.sherven.doraemon.Tool.Funtool;
+import cn.sherven.doraemon.Tool.TestPrivate;
+import cn.sherven.doraemon.hibernate.UserAdminH;
 import cn.sherven.doraemon.hibernate.UserStudentH;
+import cn.sherven.doraemon.hibernate.UserTeacherH;
+import cn.sherven.doraemon.hibernateController.UserAdminHC;
 import cn.sherven.doraemon.hibernateController.UserStudent_HC;
+import cn.sherven.doraemon.hibernateController.UserTeacher_HC;
+import cn.sherven.doraemon.test.Test;
 
 /**
  * Servlet implementation class User
@@ -119,20 +126,21 @@ public class AUser extends HttpServlet {
 		String userid = request.getParameter("userid");
 		if (userid != null && userid.equals("") == false) {
 			UserStudentH model = UserStudent_HC.queryBy_userid(userid);
-			map.put("model", new Gson().toJson(model));
+			map.put("model", model);
+			response.getWriter().append(new Gson().toJson(map));
 			return;
-		}
+		}else {
+			if (page == null || page.equals("")) {
+				page = "1";
+			}
+			List<UserStudentH> list = UserStudent_HC.queryBy_def_sort_classname(Integer.parseInt(page));
 
-		if (page == null || page.equals("")) {
-			page = "1";
+			map.put("list", list);
+			map.put("maxpage", UserStudent_HC.getMaxPageNub());
+			map.put("currpage", page);
+			map.put("type", "stu");
+			response.getWriter().append(new Gson().toJson(map));
 		}
-		List<UserStudentH> list = UserStudent_HC.queryBy_def_sort_classname(Integer.parseInt(page));
-
-		map.put("list", list);
-		map.put("maxpage", UserStudent_HC.getMaxPageNub());
-		map.put("currpage", page);
-		map.put("type", "stu");
-		response.getWriter().append(new Gson().toJson(map));
 	}
 
 	private void delStu() throws IOException {
@@ -149,12 +157,50 @@ public class AUser extends HttpServlet {
 		response.getWriter().append(new Gson().toJson(map));
 	}
 
-	private void getTea() {
-
+	private void getTea() throws IOException {
+		String page = request.getParameter("page");
+		String userid = request.getParameter("userid");
+		if (userid != null && userid.equals("") == false) {
+			UserTeacherH model = UserTeacher_HC.queryBy_userid(userid);
+			map.put("model", model);
+			response.getWriter().append(new Gson().toJson(map));
+			System.out.println("--");
+			return;
+		}else {
+			TestPrivate.print("============");
+			if (page == null || page.equals("")) {
+				page = "1";
+			}
+			List<UserTeacherH> list = UserTeacher_HC.queryAllBy_pagenub(Integer.parseInt(page));
+			map.put("list", list);
+			map.put("maxpage", UserTeacher_HC.getMaxPageNub());
+			map.put("currpage", page);
+			map.put("type", "tea");
+			response.getWriter().append(new Gson().toJson(map));
+		}
+		
 	}
 
-	private void getAdmin() {
+	private void getAdmin() throws IOException {
+		String page = request.getParameter("page");
+		String userid = request.getParameter("userid");
+		if (userid != null && userid.equals("") == false) {
+			UserAdminH model = UserAdminHC.queryBy_userid(userid);
+			map.put("model", model);
+			response.getWriter().append(new Gson().toJson(map));
+			return;
+		}
 
+		if (page == null || page.equals("")) {
+			page = "1";
+		}
+		List<UserTeacherH> list = UserAdminHC.queryAllBy_pagenub(Integer.parseInt(page));
+
+		map.put("list", list);
+		map.put("maxpage", UserAdminHC.getMaxPageNub());
+		map.put("currpage", page);
+		map.put("type", "admin");
+		response.getWriter().append(new Gson().toJson(map));
 	}
 
 	private void search() {

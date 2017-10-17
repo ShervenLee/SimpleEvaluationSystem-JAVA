@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import cn.sherven.doraemon.admin.servlet.Config;
+import cn.sherven.doraemon.admin.servlet.ConfigAdmin;
 import cn.sherven.doraemon.hibernate.HibernateUtils;
 import cn.sherven.doraemon.hibernate.UserStudentH;
 
@@ -134,8 +134,8 @@ public class UserStudent_HC {
 			String hql = "from UserStudentH as m order by m.class_id asc ";// 使用命名参数，推荐使用，易读。
 			Query query = session.createQuery(hql);
 
-			query.setFirstResult((page - 1) * Config.getPagesize());
-			query.setMaxResults(Config.getPagesize());
+			query.setFirstResult((page - 1) * ConfigAdmin.getPagesize());
+			query.setMaxResults(ConfigAdmin.getPagesize());
 
 			List<UserStudentH> list = query.list();
 			return list;
@@ -155,7 +155,7 @@ public class UserStudent_HC {
 			// asc ";// 使用命名参数，推荐使用，易读。
 			Query query = session.createQuery(hql);
 			Integer count = Integer.parseInt(String.valueOf(query.uniqueResult()));
-			Double maxpage = count / (Config.getPagesize() * 1.0);
+			Double maxpage = count / (ConfigAdmin.getPagesize() * 1.0);
 			return (int) Math.ceil(maxpage);
 		} finally {
 			if (session != null)

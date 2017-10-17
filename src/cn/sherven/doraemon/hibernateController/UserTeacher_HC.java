@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import cn.sherven.doraemon.Tool.Config;
+import cn.sherven.doraemon.admin.servlet.ConfigAdmin;
 import cn.sherven.doraemon.hibernate.HibernateUtils;
 import cn.sherven.doraemon.hibernate.UserStudentH;
 import cn.sherven.doraemon.hibernate.UserTeacherH;
@@ -80,6 +81,7 @@ public class UserTeacher_HC {
 			Query query = session.createQuery(hql);
 			query.setParameter("teacher_id", teacher_id);
 			List<UserTeacherH> list = query.list();
+			System.out.println("list="+list.size());
 			if (list.size() == 1) {
 				return list.get(0);
 			} else {
@@ -90,7 +92,23 @@ public class UserTeacher_HC {
 				session.close();
 		}
 	}
-
+	public static Integer getMaxPageNub() {
+		Session session = null;
+		try {
+			session = HibernateUtils.getSession();
+			// from后面是对象，不是表名
+			String hql = "select count(*) from UserTeacherH";
+			// String hql = "from UserStudentH as model order by model.class_id
+			// asc ";// 使用命名参数，推荐使用，易读。
+			Query query = session.createQuery(hql);
+			Integer count = Integer.parseInt(String.valueOf(query.uniqueResult()));
+			Double maxpage = count / (ConfigAdmin.getPagesize() * 1.0);
+			return (int) Math.ceil(maxpage);
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
 	public static Long getMaxItem() {
 		Session session = null;
 		try {
@@ -112,8 +130,8 @@ public class UserTeacher_HC {
 			// from后面是对象，不是表名
 			String hql = "from UserTeacherH as model";
 			Query query = session.createQuery(hql);
-			query.setFirstResult((pagenub - 1) * Config.getPagemaxitem());
-			query.setMaxResults(Config.getPagemaxitem());
+			query.setFirstResult((pagenub - 1) * ConfigAdmin.getPagesize());
+			query.setMaxResults(ConfigAdmin.getPagesize());
 			List<UserTeacherH> list = query.list();
 			return list;
 		} finally {

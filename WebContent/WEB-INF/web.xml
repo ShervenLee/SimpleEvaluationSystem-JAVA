@@ -179,4 +179,14 @@
     <servlet-name>AMsgTable</servlet-name>
     <url-pattern>/AMsgTable</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AIndex</display-name>
+    <servlet-name>AIndex</servlet-name>
+    <servlet-class>cn.sherven.doraemon.admin.servlet.AIndex</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AIndex</servlet-name>
+    <url-pattern>/AIndex</url-pattern>
+  </servlet-mapping>
 </web-app>

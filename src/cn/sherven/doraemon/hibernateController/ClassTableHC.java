@@ -34,6 +34,22 @@ public class ClassTableHC {
 				session.close();
 		}
 	}
+	public static Integer getMaxNub() {
+		Session session = null;
+		try {
+			session = HibernateUtils.getSession();
+			// from后面是对象，不是表名
+			String hql = "select count(*) from ClassTableH";
+			// String hql = "from UserStudentH as model order by model.class_id
+			// asc ";// 使用命名参数，推荐使用，易读。
+			Query query = session.createQuery(hql);
+			Integer count = Integer.parseInt(String.valueOf(query.uniqueResult()));
+			return count;
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
 	public static boolean insert(ClassTableH model) {
 		Session session = null;
 		try {

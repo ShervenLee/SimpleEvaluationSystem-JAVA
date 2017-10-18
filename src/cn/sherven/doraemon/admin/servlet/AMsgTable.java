@@ -52,11 +52,11 @@ public class AMsgTable extends HttpServlet {
 		String action = request.getParameter("action");
 
 		if (action == null || action.equals("")) {
-			map.put("list", get());
+			get();
 		} else {
 			switch (action) {
 			case "get":
-				map.put("list", get());
+				get();
 				break;
 			case "update":
 				update();
@@ -65,12 +65,10 @@ public class AMsgTable extends HttpServlet {
 				del();
 				break;
 			default:
-				map.put("list", get());
+				get();
 				break;
 			}
 		}
-		Gson gson = new Gson();
-		response.getWriter().append(gson.toJson(map));
 	}
 
 	/**
@@ -90,16 +88,23 @@ public class AMsgTable extends HttpServlet {
 		return false;
 	}
 
-	public List<MessageTableH> get() {
+	public void get() throws IOException {
 		String page = request.getParameter("page");
 		String id = request.getParameter("id");
 		if (id != null && CheckStrType.isInt(id) == true) {
-			return MessageTableModel.getbyid(id);
+			map.put("list", MessageTableModel.getbyid(id));
+			response.getWriter().append(new Gson().toJson(map));
+			return;
 		}
 		if (!CheckStrType.isInt(page)) {
 			page = "1";
-			return MessageTableModel.getbypage(Integer.parseInt(page));
+			map.put("list", MessageTableModel.getbypage(Integer.parseInt(page)));
+			response.getWriter().append(new Gson().toJson(map));
+			return;
 		}
-		return MessageTableModel.getbypage(1);
+		map.put("isok", "err");
+		map.put("errinfo", "par err");
+		response.getWriter().append(new Gson().toJson(map));
+
 	}
 }

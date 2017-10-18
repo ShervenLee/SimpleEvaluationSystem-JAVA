@@ -81,7 +81,7 @@ public class UserTeacher_HC {
 			Query query = session.createQuery(hql);
 			query.setParameter("teacher_id", teacher_id);
 			List<UserTeacherH> list = query.list();
-			System.out.println("list="+list.size());
+			System.out.println("list=" + list.size());
 			if (list.size() == 1) {
 				return list.get(0);
 			} else {
@@ -92,7 +92,8 @@ public class UserTeacher_HC {
 				session.close();
 		}
 	}
-	public static Integer getMaxPageNub() {
+
+	public static Integer getMaxNub() {
 		Session session = null;
 		try {
 			session = HibernateUtils.getSession();
@@ -102,13 +103,18 @@ public class UserTeacher_HC {
 			// asc ";// 使用命名参数，推荐使用，易读。
 			Query query = session.createQuery(hql);
 			Integer count = Integer.parseInt(String.valueOf(query.uniqueResult()));
-			Double maxpage = count / (ConfigAdmin.getPagesize() * 1.0);
-			return (int) Math.ceil(maxpage);
+			return count;
 		} finally {
 			if (session != null)
 				session.close();
 		}
 	}
+
+	public static Integer getMaxPageNub() {
+		Double maxpage = getMaxNub() / (ConfigAdmin.getPagesize() * 1.0);
+		return (int) Math.ceil(maxpage);
+	}
+
 	public static Long getMaxItem() {
 		Session session = null;
 		try {

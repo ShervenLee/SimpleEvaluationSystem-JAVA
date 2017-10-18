@@ -145,7 +145,12 @@ public class UserStudent_HC {
 		}
 	}
 
-	public static Integer getMaxPageNub() {
+	/**
+	 * 获取学生总人数
+	 * 
+	 * @return
+	 */
+	public static Integer getMaxNub() {
 		Session session = null;
 		try {
 			session = HibernateUtils.getSession();
@@ -155,12 +160,20 @@ public class UserStudent_HC {
 			// asc ";// 使用命名参数，推荐使用，易读。
 			Query query = session.createQuery(hql);
 			Integer count = Integer.parseInt(String.valueOf(query.uniqueResult()));
-			Double maxpage = count / (ConfigAdmin.getPagesize() * 1.0);
-			return (int) Math.ceil(maxpage);
+			return count;
 		} finally {
 			if (session != null)
 				session.close();
 		}
+	}
+
+	/**
+	 * 根据学生人数以及相应的配置计算最大页数
+	 * @return
+	 */
+	public static Integer getMaxPageNub() {
+		Double maxpage = getMaxNub() / (ConfigAdmin.getPagesize() * 1.0);
+		return (int) Math.ceil(maxpage);
 	}
 
 	public static Boolean del(String[] useridArr) {

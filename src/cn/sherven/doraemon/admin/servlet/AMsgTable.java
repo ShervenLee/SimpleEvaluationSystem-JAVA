@@ -18,6 +18,7 @@ import com.vividsolutions.jts.triangulate.DelaunayTriangulationBuilder;
 import cn.sherven.doraemon.Tool.CheckStrType;
 import cn.sherven.doraemon.admin.Model.MessageTableModel;
 import cn.sherven.doraemon.hibernate.MessageTableH;
+import cn.sherven.doraemon.hibernateController.UserStudent_HC;
 
 /**
  * Servlet implementation class AMsgTable
@@ -99,6 +100,8 @@ public class AMsgTable extends HttpServlet {
 		if (!CheckStrType.isInt(page)) {
 			page = "1";
 			map.put("list", MessageTableModel.getbypage(Integer.parseInt(page)));
+			map.put("maxpage", MessageTableModel.getMaxPageNub());
+			map.put("currpage", page);
 			response.getWriter().append(new Gson().toJson(map));
 			return;
 		}

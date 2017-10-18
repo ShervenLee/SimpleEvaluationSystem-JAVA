@@ -76,7 +76,36 @@ public class MessageTableModel {
 		session.close();
 		return list;
 	}
+	/**
+	 * 获取总数量
+	 * 
+	 * @return
+	 */
+	public static Integer getMaxNub() {
+		Session session = null;
+		try {
+			session = HibernateUtils.getSession();
+			// from后面是对象，不是表名
+			String hql = "select count(*) from MessageTableH";
+			// String hql = "from UserStudentH as model order by model.class_id
+			// asc ";// 使用命名参数，推荐使用，易读。
+			Query query = session.createQuery(hql);
+			Integer count = Integer.parseInt(String.valueOf(query.uniqueResult()));
+			return count;
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
 
+	/**
+	 * 最大页数
+	 * @return
+	 */
+	public static Integer getMaxPageNub() {
+		Double maxpage = getMaxNub() / (ConfigAdmin.getPagesize() * 1.0);
+		return (int) Math.ceil(maxpage);
+	}
 	/**
 	 * 根据主键id获取相应的model
 	 * 

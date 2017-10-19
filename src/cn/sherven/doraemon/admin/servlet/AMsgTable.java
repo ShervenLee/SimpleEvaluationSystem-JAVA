@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.print.attribute.standard.PrinterMessageFromOperator;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -109,5 +110,6 @@ public class AMsgTable extends HttpServlet {
 		map.put("errinfo", "par err");
 		response.getWriter().append(new Gson().toJson(map));
 
+		
 	}
 }

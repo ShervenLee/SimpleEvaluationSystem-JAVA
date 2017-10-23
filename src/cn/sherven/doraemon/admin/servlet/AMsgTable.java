@@ -1,25 +1,18 @@
 package cn.sherven.doraemon.admin.servlet;
 
-import static org.hamcrest.CoreMatchers.nullValue;
-
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.print.attribute.standard.PrinterMessageFromOperator;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.vividsolutions.jts.triangulate.DelaunayTriangulationBuilder;
 
 import cn.sherven.doraemon.Tool.CheckStrType;
 import cn.sherven.doraemon.admin.Model.MessageTableModel;
-import cn.sherven.doraemon.hibernate.MessageTableH;
-import cn.sherven.doraemon.hibernateController.UserStudent_HC;
 
 /**
  * Servlet implementation class AMsgTable
@@ -82,11 +75,30 @@ public class AMsgTable extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public Boolean del() {
+	public Boolean del() throws IOException {
+		String id = request.getParameter("id");
+		if (id != null && id.equals("") == false) {
+			if (MessageTableModel.del(id)) {
+				map.put("isok", true);
+			} else {
+				map.put("isok", false);
+				map.put("errinfo", "id null");
+			}
+		} else {
+			map.put("isok", false);
+			map.put("errinfo", "id null");
+		}
+		response.getWriter().append(new Gson().toJson(map));
 		return false;
+
 	}
 
 	public Boolean update() {
+		return false;
+	}
+
+	public Boolean add() {
+
 		return false;
 	}
 
@@ -110,6 +122,5 @@ public class AMsgTable extends HttpServlet {
 		map.put("errinfo", "par err");
 		response.getWriter().append(new Gson().toJson(map));
 
-		
 	}
 }

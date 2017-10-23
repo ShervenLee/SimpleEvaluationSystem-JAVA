@@ -189,4 +189,14 @@
     <servlet-name>AIndex</servlet-name>
     <url-pattern>/AIndex</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AStatistics</display-name>
+    <servlet-name>AStatistics</servlet-name>
+    <servlet-class>cn.sherven.doraemon.admin.servlet.AStatistics</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AStatistics</servlet-name>
+    <url-pattern>/AStatistics</url-pattern>
+  </servlet-mapping>
 </web-app>

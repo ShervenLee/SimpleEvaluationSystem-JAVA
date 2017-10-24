@@ -112,7 +112,7 @@ public class MessageTableModel {
 	 * @param id
 	 * @return List<MessageTableH>
 	 */
-	public static List<MessageTableH> getbyid(String id) {
+	public static MessageTableH getbyid(String id) {
 		Session session = HibernateUtils.getSession();
 		session.beginTransaction();
 
@@ -123,7 +123,11 @@ public class MessageTableModel {
 		List list = createQuery.list();
 		session.getTransaction().commit();
 		session.close();
-		return list;
+		
+		if (list.size()==1) {
+			return (MessageTableH) list.get(0);
+		}
+		return null;
 	}
 
 	public static Boolean update(MessageTableH model) {

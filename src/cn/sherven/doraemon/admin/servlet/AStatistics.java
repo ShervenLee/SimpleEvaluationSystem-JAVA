@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.google.gson.Gson;
 
 /**
  * 查看相关统计数据，只能查看！
@@ -50,7 +50,24 @@ public class AStatistics extends HttpServlet {
 		doGet(request, response);
 	}
 
-	public Boolean get() {
-		return false;
+	public void get() throws IOException {
+		/**
+		 * type:<person|department> 教师个人、系别
+		 */
+		String type = request.getParameter("type");
+		if (type.equals("") == true || type == null) {
+			map.put("isok", false);
+			map.put("errinfo", "type null");
+			response.getWriter().append(new Gson().toJson(map));
+			return;
+		}
+		switch (type) {
+		case "person":
+			String id = request.getParameter("id");
+			break;
+		default:
+
+		}
+		response.getWriter().append(new Gson().toJson(map));
 	}
 }

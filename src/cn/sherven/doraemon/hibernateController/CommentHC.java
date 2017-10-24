@@ -101,4 +101,23 @@ public class CommentHC {
 				session.close();
 		}
 	}
+	public static List<CommentH> queryBy_TeaID(String teaID ) {
+		Session session = null;
+		try {
+			session = HibernateUtils.getSession();
+			// from后面是对象，不是表名
+			String hql = "from CommentH as m where m.teacher_id=:teacher_id ORDER BY class_id,courses_id,student_id,score";// 使用命名参数，推荐使用，易读。
+			Query query = session.createQuery(hql);
+			query.setParameter("teacher_id", teaID);
+			List<CommentH> list = query.list();
+			if (list != null) {
+				return list;
+			} else {
+				return null;
+			}
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
 }

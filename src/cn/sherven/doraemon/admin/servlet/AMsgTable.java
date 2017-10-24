@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 
 import cn.sherven.doraemon.Tool.CheckStrType;
 import cn.sherven.doraemon.admin.Model.MessageTableModel;
+import cn.sherven.doraemon.hibernate.MessageTableH;
 
 /**
  * Servlet implementation class AMsgTable
@@ -106,7 +107,14 @@ public class AMsgTable extends HttpServlet {
 		String page = request.getParameter("page");
 		String id = request.getParameter("id");
 		if (id != null && CheckStrType.isInt(id) == true) {
-			map.put("list", MessageTableModel.getbyid(id));
+			MessageTableH model = MessageTableModel.getbyid(id);
+			if (model==null) {
+				map.put("isok", false);
+				map.put("errinfo", "id not find");
+				response.getWriter().append(new Gson().toJson(map));
+				return;	
+			}
+			map.put("model", model);
 			response.getWriter().append(new Gson().toJson(map));
 			return;
 		}

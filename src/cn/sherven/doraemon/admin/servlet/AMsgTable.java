@@ -29,7 +29,6 @@ public class AMsgTable extends HttpServlet {
 	 */
 	public AMsgTable() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -38,7 +37,6 @@ public class AMsgTable extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.setCharacterEncoding("utf-8");
 		response.setHeader("Content-type", "text/html;charset=UTF-8");
 		this.request = request;
@@ -94,12 +92,40 @@ public class AMsgTable extends HttpServlet {
 
 	}
 
-	public Boolean update() {
+	public Boolean update() throws IOException {
+		String id = request.getParameter("id");
+		String type = request.getParameter("type");
+		String json = request.getParameter("json");
+		String name = request.getParameter("name");
+		MessageTableH model = new MessageTableH();
+		model.setId_(id);
+		model.setJson(json);
+		model.setName(name);
+		model.setType(type);
+		if (MessageTableModel.update(model)) {
+			map.put("isok", true);
+		} else {
+			map.put("isok", false);
+		}
+
+		response.getWriter().append(new Gson().toJson(map));
 		return false;
 	}
 
-	public Boolean add() {
-
+	public Boolean add() throws IOException {
+		String type = request.getParameter("type");
+		String json = request.getParameter("json");
+		String name = request.getParameter("name");
+		MessageTableH model = new MessageTableH();
+		model.setJson(json);
+		model.setName(name);
+		model.setType(type);
+		if (MessageTableModel.add(model)) {
+			map.put("isok", true);
+		} else {
+			map.put("isok", false);
+		}
+		response.getWriter().append(new Gson().toJson(map));
 		return false;
 	}
 
@@ -108,11 +134,11 @@ public class AMsgTable extends HttpServlet {
 		String id = request.getParameter("id");
 		if (id != null && CheckStrType.isInt(id) == true) {
 			MessageTableH model = MessageTableModel.getbyid(id);
-			if (model==null) {
+			if (model == null) {
 				map.put("isok", false);
 				map.put("errinfo", "id not find");
 				response.getWriter().append(new Gson().toJson(map));
-				return;	
+				return;
 			}
 			map.put("model", model);
 			response.getWriter().append(new Gson().toJson(map));

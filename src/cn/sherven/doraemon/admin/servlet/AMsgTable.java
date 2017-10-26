@@ -58,6 +58,9 @@ public class AMsgTable extends HttpServlet {
 			case "del":
 				del();
 				break;
+			case "add":
+				add();
+				break;
 			default:
 				get();
 				break;
@@ -104,8 +107,10 @@ public class AMsgTable extends HttpServlet {
 		model.setType(type);
 		if (MessageTableModel.update(model)) {
 			map.put("isok", true);
+			map.put("exisok", true);
 		} else {
 			map.put("isok", false);
+			map.put("exisok", false);
 		}
 
 		response.getWriter().append(new Gson().toJson(map));

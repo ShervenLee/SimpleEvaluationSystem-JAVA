@@ -42,6 +42,7 @@ public class AMsgTable extends HttpServlet {
 		this.request = request;
 		this.response = response;
 		map.put("isok", "ok");
+		map.put("isdialog", false);
 
 		String action = request.getParameter("action");
 
@@ -82,6 +83,7 @@ public class AMsgTable extends HttpServlet {
 		if (id != null && id.equals("") == false) {
 			if (MessageTableModel.del(id)) {
 				map.put("isok", true);
+				map.put("isdialog", true);
 			} else {
 				map.put("isok", false);
 				map.put("errinfo", "id null");
@@ -107,12 +109,17 @@ public class AMsgTable extends HttpServlet {
 		model.setType(type);
 		if (MessageTableModel.update(model)) {
 			map.put("isok", true);
-			map.put("exisok", true);
+			map.put("isdialog", true);
 		} else {
 			map.put("isok", false);
-			map.put("exisok", false);
+			map.put("isdialog", false);
 		}
 
+		//修改以后还是返回在显示视图，所以需要相应的ID数据
+		MessageTableH model2 = MessageTableModel.getbyid(id);
+		map.put("model", model2);
+		
+		
 		response.getWriter().append(new Gson().toJson(map));
 		return false;
 	}

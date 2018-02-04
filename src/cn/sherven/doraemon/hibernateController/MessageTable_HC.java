@@ -88,4 +88,5 @@ public class MessageTable_HC {
 		}
 		return true;
 	}
+	
 }

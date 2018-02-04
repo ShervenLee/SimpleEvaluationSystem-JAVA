@@ -36,7 +36,6 @@ public class MessageTableModel {
 	 */
 	public static Boolean add(List<MessageTableH> modelList) {
 		try {
-
 			Session session = HibernateUtils.getSession();
 			session.beginTransaction();
 			for (MessageTableH messageTableH : modelList) {

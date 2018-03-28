@@ -5,13 +5,8 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import com.sun.jna.platform.win32.OaIdl.ELEMDESC;
-import com.vividsolutions.jts.operation.relate.RelateComputer;
-
 import cn.sherven.doraemon.hibernate.CommentH;
 import cn.sherven.doraemon.hibernate.HibernateUtils;
-import cn.sherven.doraemon.hibernate.UserStudentH;
-import sun.net.www.content.text.plain;
 
 public class CommentHC {
 	/**
